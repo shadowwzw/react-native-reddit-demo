@@ -14,25 +14,31 @@ class Reddits extends Component {
     const after = reddits.after || null;
     const error = reddits.error || null;
     const loading = reddits.loading || null;
+    console.log('loading = ', loading);
     console.log('reddits.data = ', reddits.data);
-    return error ? (<View><Text>{error}</Text></View>) : (<View style={{ flex: 1}}>
-        <FlatList
-          style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}
-          data={reddits.data}
-          keyExtractor={( item ) => item.data.subreddit_id }
-          onEndReached={() => { !loading && actions.getReddits({ after }) }}
-          renderItem={({item: { data: { thumbnail, subreddit_id, title } }}) => (
-            <View style={{flex: 1, flexDirection: 'row'}}>
-              <Image
-                style={{width: 100, height: 100}}
-                source={{uri: thumbnail}}
-              />
-              <View style={{flex: 1, backgroundColor: 'white'}} ><Text>{title || ""}</Text></View>
-            </View>
-          )}
-        />
-        <ActivityIndicator animating={ loading }/>
-      </View>)
+    return (<View style={{ flex: 1 }}>
+      {
+        error ? (<View><Text>{error}</Text></View>) : loading && !reddits.data.length ? <ActivityIndicator size="large" style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }} /> :
+          (<View style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}>
+            <FlatList
+              data={reddits.data}
+              keyExtractor={( item ) => item.data.subreddit_id }
+              onEndReached={() => { !loading && actions.getReddits({ after }); }}
+              renderItem={({item: { data: { thumbnail, subreddit_id, title } }}) => (
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <Image
+                    style={{width: 100, height: 100}}
+                    source={{uri: thumbnail}}
+                  />
+                  <View style={{flex: 1, backgroundColor: 'white'}} ><Text>{title || ""}</Text></View>
+                </View>
+              )}
+            />
+          </View>)
+      }
+    </View>)
+
+
   }
 }
 
