@@ -3,10 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
-import Counter from './containers/Counter';
+import Reddits from './containers/Reddits';
 import reducer from './reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { counterIncSaga, counterDecSaga } from './sagas/counter';
+import { getRedditsSaga } from './sagas/reddits';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -15,14 +15,13 @@ const store = createStore(reducer, composeWithDevTools(
   // other store enhancers if any
 ));
 
-sagaMiddleware.run(counterIncSaga);
-sagaMiddleware.run(counterDecSaga);
+sagaMiddleware.run(getRedditsSaga);
 
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Counter/>
+        <Reddits/>
       </Provider>
     );
   }
