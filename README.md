@@ -1,5 +1,12 @@
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
+Installation (MacOS):
+1) $ brew update && brew cask install react-native-debugger
+2) download zip from https://github.com/shadowwzw/react-native-redux-saga
+3) unzip && cd project folder
+4) npm install or yarn
+5) npm run android/ios or yarn run android/ios
+
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
 
 ## Table of Contents
