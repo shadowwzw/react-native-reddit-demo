@@ -11,14 +11,17 @@ class Reddits extends Component {
   }
   render() {
     const { actions, reddits } = this.props;
+    const after = reddits.after || null;
+    const error = reddits.error || null;
+    const loading = reddits.loading || null;
     console.log('reddits.data = ', reddits.data);
-    return (
-      <View>
-        <Text style={{ fontSize: 50}}>Text</Text>
+    return error ? (<View><Text>{error}</Text></View>) : (<View>
+        <Text style={{ fontSize: 10}}>Все сообщения</Text>
         <FlatList
           style={{ marginBottom: 100 }}
           data={reddits.data}
           keyExtractor={( item ) => item.data.subreddit_id }
+          onEndReached={() => { !loading && actions.getReddits({ after }) }}
           renderItem={({item: { data: { thumbnail, subreddit_id, title } }}) => (
             <View style={{flex: 1, flexDirection: 'row'}}>
               <Image
@@ -30,8 +33,7 @@ class Reddits extends Component {
           )}
         />
         <ActivityIndicator />
-      </View>
-    );
+      </View>)
   }
 }
 

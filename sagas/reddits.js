@@ -1,10 +1,11 @@
 import { takeEvery, put } from 'redux-saga/effects';
 import { GET_REDDITS } from "../actions/Reddits";
 
-const getRedditsFetch = function* (){
+const getRedditsFetch = function* (action){
+  const { after } = action;
   yield put({ type: GET_REDDITS.START });
   try {
-    const result = yield fetch('https://www.reddit.com/r/all.json');
+    const result = yield fetch(`https://www.reddit.com/r/all.json${after ? `?after=${after}` : ""}`);
     const json = yield result.json();
     console.log('json = ', json);
     yield put({ type: GET_REDDITS.FINISH, data: json.data.children, after: json.data.after });
