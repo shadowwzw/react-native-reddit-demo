@@ -15,10 +15,9 @@ class Reddits extends Component {
     const error = reddits.error || null;
     const loading = reddits.loading || null;
     console.log('reddits.data = ', reddits.data);
-    return error ? (<View><Text>{error}</Text></View>) : (<View>
-        <Text style={{ fontSize: 10}}>Все сообщения</Text>
+    return error ? (<View><Text>{error}</Text></View>) : (<View style={{ flex: 1}}>
         <FlatList
-          style={{ marginBottom: 100 }}
+          style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}
           data={reddits.data}
           keyExtractor={( item ) => item.data.subreddit_id }
           onEndReached={() => { !loading && actions.getReddits({ after }) }}
@@ -32,7 +31,7 @@ class Reddits extends Component {
             </View>
           )}
         />
-        <ActivityIndicator />
+        <ActivityIndicator animating={ loading }/>
       </View>)
   }
 }
