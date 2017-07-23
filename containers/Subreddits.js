@@ -1,0 +1,58 @@
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { StyleSheet, Text, View, Button, ActivityIndicator, Platform, FlatList, Image } from 'react-native';
+import { connect } from 'react-redux';
+import actionCreators from '../actions/index';
+import SubredditList from '../components/SubredditList';
+console.log('actionCreators = ', actionCreators);
+
+class Subreddits extends Component {
+  componentDidMount(){
+    const { actions } = this.props;
+    actions.getSubreddits();
+  }
+  render() {
+    const { actions, subreddits } = this.props;
+    const after = subreddits.after || null;
+    const error = subreddits.error || null;
+    const loading = subreddits.loading || null;
+    const count = subreddits.count || 0;
+    console.log('loading = ', loading);
+    console.log('reddits.data = ', subreddits.data);
+    const currentTime = Date.now() / 1000;
+    return (<View style={{ flex: 1 }}>
+      {
+        error ? (<View ><Text>{error}</Text></View>) :
+          <SubredditList data={subreddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} />
+      }
+    </View>)
+
+
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 50,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  layoutButtonContainer: {
+    margin: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  }
+});
+
+function select(state) {
+  return {
+    subreddits: state.subreddits
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(actionCreators, dispatch) }
+}
+
+export default connect(select, mapDispatchToProps)(Subreddits);
