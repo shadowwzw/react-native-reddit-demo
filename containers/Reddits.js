@@ -18,6 +18,7 @@ class Reddits extends Component {
     const count = reddits.count || 0;
     console.log('loading = ', loading);
     console.log('reddits.data = ', reddits.data);
+    const currentTime = Date.now() / 1000;
     return (<View style={{ flex: 1 }}>
       {
         error ? (<View ><Text>{error}</Text></View>) :
@@ -26,7 +27,7 @@ class Reddits extends Component {
               data={reddits.data}
               keyExtractor={( item ) => item.data.name }
               onEndReached={() => { !loading && actions.getReddits({ after, count }); }}
-              renderItem={({item}) => <RedditList item={item}/>}
+              renderItem={({item}) => <RedditList item={item} currentTime={currentTime}/>}
             />
             {loading && <ActivityIndicator size="large" style={{
               position: 'absolute',
