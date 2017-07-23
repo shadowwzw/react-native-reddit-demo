@@ -2,10 +2,12 @@ import { takeEvery, put } from 'redux-saga/effects';
 import { GET_REDDITS } from "../actions/Reddits";
 
 const getRedditsFetch = function* (action){
-  const { after } = action;
+  const { after, count } = action;
   yield put({ type: GET_REDDITS.START });
   try {
-    const result = yield fetch(`https://www.reddit.com/r/all.json${after ? `?after=${after}` : ""}`);
+    const url = `https://www.reddit.com/r/all.json?count=${count || 0}${after ? `&after=${after}` : ""}`;
+    console.log('url = ', url);
+    const result = yield fetch(url);
     const json = yield result.json();
     console.log('json = ', json);
     yield put({ type: GET_REDDITS.FINISH, data: json.data.children, after: json.data.after });

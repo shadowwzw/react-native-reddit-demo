@@ -14,6 +14,7 @@ class Reddits extends Component {
     const after = reddits.after || null;
     const error = reddits.error || null;
     const loading = reddits.loading || null;
+    const count = reddits.count || 0;
     console.log('loading = ', loading);
     console.log('reddits.data = ', reddits.data);
     return (<View style={{ flex: 1 }}>
@@ -22,9 +23,9 @@ class Reddits extends Component {
           (<View style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}>
             <FlatList
               data={reddits.data}
-              keyExtractor={( item ) => item.data.subreddit_id }
-              onEndReached={() => { !loading && actions.getReddits({ after }); }}
-              renderItem={({item: { data: { thumbnail, subreddit_id, title } }}) => (
+              keyExtractor={( item ) => item.data.name }
+              onEndReached={() => { !loading && actions.getReddits({ after, count }); }}
+              renderItem={({item: { data: { thumbnail, title } }}) => (
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <Image
                     style={{width: 100, height: 100}}
