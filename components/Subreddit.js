@@ -17,8 +17,8 @@ export default ({ currentTime, defaultIcon, item : { data: {
       source={{uri: icon_img || defaultIcon}}
     />
     <View style={{flex: 1, backgroundColor: 'white'}} >
-      <Text>{title || ""}</Text>
-      <Text>{url || ""}</Text>
+      <Text style={{fontWeight: 'bold'}}>{title || ""}</Text>
+      <Text style={{color: 'blue'}}>{url || ""}</Text>
       <Text>{ public_description }</Text>
       <Text>{subscribers || 0} подписчиков</Text>
     </View>

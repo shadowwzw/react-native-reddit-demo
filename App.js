@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, WebView } from 'react-native';
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import createSagaMiddleware from 'redux-saga'
@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { getRedditsSaga } from './sagas/reddits';
 import { getSubredditsSaga } from './sagas/subreddits';
 import { StackNavigator, TabNavigator } from 'react-navigation';
+import WebViewComponent from './components/WebViewComponent';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -21,7 +22,7 @@ const store = createStore(reducer, composeWithDevTools(
 sagaMiddleware.run(getRedditsSaga);
 sagaMiddleware.run(getSubredditsSaga);
 
-const MyApp = TabNavigator({
+const MyAppInTabNavigator = TabNavigator({
   Reddits: {
     screen: Reddits,
   },
@@ -37,11 +38,16 @@ const MyApp = TabNavigator({
   },
 });
 
+const MyAppInStackNavigator = StackNavigator({
+  Home: { screen: MyAppInTabNavigator },
+  WebViewComponent: { screen: WebViewComponent },
+});
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-          <MyApp/>
+          <MyAppInStackNavigator/>
       </Provider>
     );
   }

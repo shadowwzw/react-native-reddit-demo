@@ -9,24 +9,26 @@ import { DEFAULT_ICON } from '../constants/index'
 class Reddits extends Component {
   static navigationOptions = {
     tabBarLabel: 'Все сообщения',
+    title: 'Все сообщения',
   };
   componentDidMount(){
     const { actions } = this.props;
     actions.getReddits();
   }
   render() {
-    const { actions, reddits } = this.props;
+    const { actions, reddits, navigation: { navigate } } = this.props;
     const after = reddits.after || null;
     const error = reddits.error || null;
     const loading = reddits.loading || null;
     const count = reddits.count || 0;
+    const openInWebViewComponent = (uri, title) => { navigate('WebViewComponent', { uri, title }) };
     console.log('loading = ', loading);
     console.log('reddits.data = ', reddits.data);
     const currentTime = Date.now() / 1000;
     return (<View style={{ flex: 1 }}>
       {
         error ? (<View ><Text>{error}</Text></View>) :
-          <RedditList data={reddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} defaultIcon={DEFAULT_ICON}/>
+          <RedditList data={reddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} defaultIcon={DEFAULT_ICON} openInWebViewComponent={openInWebViewComponent}/>
       }
     </View>)
 
