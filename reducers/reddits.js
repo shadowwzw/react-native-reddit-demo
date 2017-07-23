@@ -6,7 +6,8 @@ export default function counter(state = { data: [], loading: false, error: null,
     case GET_REDDITS.START:
       return { ...state, loading: true, error: null };
     case GET_REDDITS.FINISH:
-      return { ...state, data: [ ...state.data, ...action.data ], loading: false, after: action.after, count: state.count + 25 };
+      const filteringNewData = ( newData ) => _.unionBy( newData, reddit => reddit.data.name );
+      return { ...state, data: filteringNewData([ ...state.data, ...action.data ]), loading: false, after: action.after, count: state.count + 25 };
     case GET_REDDITS.ERROR:
       return { ...state, loading: true, error: action.error };
     default:

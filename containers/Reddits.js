@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { StyleSheet, Text, View, Button, ActivityIndicator, Platform, FlatList, Image } from 'react-native';
 import { connect } from 'react-redux';
 import * as RedditsActionCreators from '../actions/Reddits';
-import Reddit from '../components/Reddit';
+import RedditList from '../components/RedditList';
 
 class Reddits extends Component {
   componentDidMount(){
@@ -22,22 +22,7 @@ class Reddits extends Component {
     return (<View style={{ flex: 1 }}>
       {
         error ? (<View ><Text>{error}</Text></View>) :
-          (<View style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}>
-            <FlatList
-              data={reddits.data}
-              keyExtractor={( item ) => item.data.name }
-              onEndReached={() => { !loading && actions.getReddits({ after, count }); }}
-              renderItem={({item}) => <Reddit item={item} currentTime={currentTime}/>}
-            />
-            {loading && <ActivityIndicator size="large" style={{
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              alignItems: 'center',
-              justifyContent: 'center' }} />}
-          </View>)
+          <RedditList data={reddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} />
       }
     </View>)
 
