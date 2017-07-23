@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, ActivityIndicator, Platform, FlatList, 
 import { connect } from 'react-redux';
 import * as RedditsActionCreators from '../actions/Reddits';
 import RedditList from '../components/RedditList';
-import { DEFAULT_ICON } from '../constants/index'
+import { DEFAULT_ICON, REDDIT_HOST } from '../constants/index'
 
 class Reddits extends Component {
   static navigationOptions = {
@@ -28,7 +28,16 @@ class Reddits extends Component {
     return (<View style={{ flex: 1 }}>
       {
         error ? (<View ><Text>{error}</Text></View>) :
-          <RedditList data={reddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} defaultIcon={DEFAULT_ICON} openInWebViewComponent={openInWebViewComponent}/>
+          <RedditList
+            data={reddits.data}
+            currentTime={currentTime}
+            loading={loading}
+            actions={actions}
+            after={after}
+            count={count}
+            defaultIcon={DEFAULT_ICON}
+            redditHost={REDDIT_HOST}
+            openInWebViewComponent={openInWebViewComponent}/>
       }
     </View>)
 
