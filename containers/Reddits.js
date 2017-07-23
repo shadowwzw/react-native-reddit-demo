@@ -7,6 +7,9 @@ import RedditList from '../components/RedditList';
 import { DEFAULT_ICON } from '../constants/index'
 
 class Reddits extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Все сообщения',
+  };
   componentDidMount(){
     const { actions } = this.props;
     actions.getReddits();

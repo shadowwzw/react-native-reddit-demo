@@ -8,6 +8,9 @@ import { DEFAULT_ICON } from '../constants/index';
 console.log('actionCreators = ', actionCreators);
 
 class Subreddits extends Component {
+  static navigationOptions = {
+    tabBarLabel: 'Категории',
+  };
   componentDidMount(){
     const { actions } = this.props;
     actions.getSubreddits();

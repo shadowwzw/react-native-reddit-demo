@@ -9,6 +9,7 @@ import reducer from './reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { getRedditsSaga } from './sagas/reddits';
 import { getSubredditsSaga } from './sagas/subreddits';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,11 +21,27 @@ const store = createStore(reducer, composeWithDevTools(
 sagaMiddleware.run(getRedditsSaga);
 sagaMiddleware.run(getSubredditsSaga);
 
+const MyApp = TabNavigator({
+  Reddits: {
+    screen: Reddits,
+  },
+  Subreddits: {
+    screen: Subreddits,
+  },
+}, {
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+    labelStyle: {
+      fontSize: 15,
+    },
+  },
+});
+
 export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <Reddits/>
+          <MyApp/>
       </Provider>
     );
   }
