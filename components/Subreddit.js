@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, ActivityIndicator, Platform, FlatList, Image } from 'react-native';
 
-export default ({ currentTime, item : { data: {
+export default ({ currentTime, defaultIcon, item : { data: {
   icon_img,
   title,
   subreddit_name_prefixed,
@@ -14,7 +14,7 @@ export default ({ currentTime, item : { data: {
   <View style={{flex: 1, flexDirection: 'row', marginBottom: 5, marginTop: 5}}>
     <Image
       style={{width: 100, height: 100}}
-      source={{uri: icon_img || 'https://i-cdn.phonearena.com/images/article/70867-image/Best-Reddit-clients-for-Android.jpg'}}
+      source={{uri: icon_img || defaultIcon}}
     />
     <View style={{flex: 1, backgroundColor: 'white'}} >
       <Text>{title || ""}</Text>

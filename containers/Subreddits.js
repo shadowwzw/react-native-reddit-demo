@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Button, ActivityIndicator, Platform, FlatList, 
 import { connect } from 'react-redux';
 import actionCreators from '../actions/index';
 import SubredditList from '../components/SubredditList';
+import { DEFAULT_ICON } from '../constants/index';
 console.log('actionCreators = ', actionCreators);
 
 class Subreddits extends Component {
@@ -23,7 +24,7 @@ class Subreddits extends Component {
     return (<View style={{ flex: 1 }}>
       {
         error ? (<View ><Text>{error}</Text></View>) :
-          <SubredditList data={subreddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} />
+          <SubredditList data={subreddits.data} currentTime={currentTime} loading={loading} actions={actions} after={after} count={count} defaultIcon={DEFAULT_ICON}/>
       }
     </View>)
 
