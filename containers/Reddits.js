@@ -19,7 +19,7 @@ class Reddits extends Component {
     console.log('reddits.data = ', reddits.data);
     return (<View style={{ flex: 1 }}>
       {
-        error ? (<View><Text>{error}</Text></View>) : loading && !reddits.data.length ? <ActivityIndicator size="large" style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }} /> :
+        error ? (<View ><Text>{error}</Text></View>) :
           (<View style={{ marginTop: 25, marginLeft: 5, marginRight: 5, marginBottom: 5 }}>
             <FlatList
               data={reddits.data}
@@ -35,6 +35,14 @@ class Reddits extends Component {
                 </View>
               )}
             />
+            {loading && <ActivityIndicator size="large" style={{
+              position: 'absolute',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              alignItems: 'center',
+              justifyContent: 'center' }} />}
           </View>)
       }
     </View>)
