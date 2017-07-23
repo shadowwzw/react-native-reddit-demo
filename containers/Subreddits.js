@@ -10,6 +10,7 @@ console.log('actionCreators = ', actionCreators);
 class Subreddits extends Component {
   static navigationOptions = {
     tabBarLabel: 'Категории',
+    title: 'Категории',
   };
   componentDidMount(){
     const { actions } = this.props;
