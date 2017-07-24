@@ -22,8 +22,6 @@ class Reddits extends Component {
     const loading = reddits.loading || null;
     const count = reddits.count || 0;
     const openInWebViewComponent = (uri, title) => { navigate('WebViewComponent', { uri, title }) };
-    console.log('loading = ', loading);
-    console.log('reddits.data = ', reddits.data);
     const currentTime = Date.now() / 1000;
     return (<View style={{ flex: 1 }}>
       {

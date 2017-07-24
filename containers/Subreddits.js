@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import actionCreators from '../actions/index';
 import SubredditList from '../components/SubredditList';
 import { DEFAULT_ICON } from '../constants/index';
-console.log('actionCreators = ', actionCreators);
 
 class Subreddits extends Component {
   static navigationOptions = {
@@ -22,8 +21,6 @@ class Subreddits extends Component {
     const error = subreddits.error || null;
     const loading = subreddits.loading || null;
     const count = subreddits.count || 0;
-    console.log('loading = ', loading);
-    console.log('reddits.data = ', subreddits.data);
     const currentTime = Date.now() / 1000;
     return (<View style={{ flex: 1 }}>
       {
