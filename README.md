@@ -1,3 +1,5 @@
+You can try this App in [Expo](https://expo.io/@shadowwzw/react-native-reddit-demo)
+
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Installation (MacOS):
